@@ -98,7 +98,7 @@ public class ReservationsControllerTests
     public async Task GetReservationById_ReturnsOkResult_WithReservation()
     {
         //Arrange
-        int reservationId = 1;
+        var reservationId = 1;
         var reservationDto = new ReservationDto
         {
             Id = reservationId,
@@ -109,13 +109,14 @@ public class ReservationsControllerTests
             IncludesBreakfast = true,
             TotalPrice = 200
         };
-        
-        _mockReservationService.Setup(service => service.GetReservationByIdAsync(reservationId)).ReturnsAsync(reservationDto);
-        
+
+        _mockReservationService.Setup(service => service.GetReservationByIdAsync(reservationId))
+            .ReturnsAsync(reservationDto);
+
         //Act
-        
+
         var result = await _controller.GetReservationById(reservationId);
-        
+
         //Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
         var returnValue = Assert.IsType<ReservationDto>(okResult.Value);
@@ -126,17 +127,75 @@ public class ReservationsControllerTests
     public async Task GetReservationById_ReturnsNotFound_WhenReservationDoesNotExist()
     {
         // Arrange
-        int reservationId = 1;
-        
+        var reservationId = 1;
+
         _mockReservationService.Setup(service => service.GetReservationByIdAsync(reservationId))
             .ReturnsAsync((ReservationDto)null);
-        
+
         //Act
         var result = await _controller.GetReservationById(reservationId);
-        
+
         //Assert
         Assert.IsType<NotFoundResult>(result);
+    }
 
+    [Fact]
+    public async Task GetAllReservations_ReturnsOkResult_WithListOfReservations()
+    {
+        // Arrange
+        var reservations = new List<ReservationDto>
+        {
+            new()
+            {
+                Id = 1, RoomId = 1, CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(2),
+                NumberOfGuests = 2, IncludesBreakfast = true, TotalPrice = 200
+            },
+            new()
+            {
+                Id = 2, RoomId = 2, CheckInDate = DateTime.Now, CheckOutDate = DateTime.Now.AddDays(3),
+                NumberOfGuests = 3, IncludesBreakfast = false, TotalPrice = 300
+            }
+        };
 
+        _mockReservationService.Setup(service => service.GetAllReservationsAsync())
+            .ReturnsAsync(reservations);
+
+        // Act
+        var result = await _controller.GetAllReservations();
+
+        // Assert
+        var okResult = Assert.IsType<OkObjectResult>(result);
+        var returnValue = Assert.IsType<List<ReservationDto>>(okResult.Value);
+        Assert.Equal(2, returnValue.Count);
+    }
+
+    [Fact]
+    public async Task CancelReservation_ReturnsNoContent_WhenCancellationIsSuccessful()
+    {
+        // Arrange
+        var reservationId = 1;
+        _mockReservationService.Setup(service => service.CancelReservationAsync(reservationId))
+            .ReturnsAsync(true);
+
+        // Act
+        var result = await _controller.CancelReservation(reservationId);
+
+        // Assert
+        Assert.IsType<NoContentResult>(result);
+    }
+
+    [Fact]
+    public async Task CancelReservation_ReturnsNotFound_WhenReservationDoesNotExist()
+    {
+        // Arrange
+        var reservationId = 1;
+        _mockReservationService.Setup(service => service.CancelReservationAsync(reservationId))
+            .ReturnsAsync(false);
+
+        // Act
+        var result = await _controller.CancelReservation(reservationId);
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result);
     }
 }
