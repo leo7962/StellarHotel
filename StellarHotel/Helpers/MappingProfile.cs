@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Core.Models;
 using StellarHotel.Dtos;
+using StellarHotel.Models;
 
 namespace StellarHotel.Helpers;
 

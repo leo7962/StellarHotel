@@ -1,5 +1,5 @@
-﻿using Core.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using StellarHotel.Models;
 
 namespace StellarHotel.Context;
 

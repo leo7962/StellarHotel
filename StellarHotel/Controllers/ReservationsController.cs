@@ -1,8 +1,8 @@
-﻿using Core.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Npgsql;
 using StellarHotel.Dtos;
 using StellarHotel.Interfaces;
+using StellarHotel.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace StellarHotel.Controllers;

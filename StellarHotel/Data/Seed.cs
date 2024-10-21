@@ -1,6 +1,6 @@
-﻿using Core.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using StellarHotel.Context;
+using StellarHotel.Models;
 using System.Text.Json;
 
 namespace StellarHotel.Data;

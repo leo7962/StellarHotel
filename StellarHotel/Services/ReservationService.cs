@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using StellarHotel.Context;
 using StellarHotel.Dtos;
 using StellarHotel.Interfaces;
+using StellarHotel.Models;
 
 namespace StellarHotel.Services;
 

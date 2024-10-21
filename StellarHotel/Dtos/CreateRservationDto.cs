@@ -1,4 +1,4 @@
-﻿using Core.Validations;
+﻿using StellarHotel.Validations;
 using System.ComponentModel.DataAnnotations;
 
 namespace StellarHotel.Dtos;
