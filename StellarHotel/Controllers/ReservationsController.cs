@@ -54,7 +54,7 @@ public class ReservationsController : ControllerBase
         return Ok(reservation);
     }
 
-    [HttpGet(" all-reservations")]
+    [HttpGet("all-reservations")]
     [SwaggerOperation(Summary = "Get all reservations",
         Description = "Returns a list of all reservations categorized as past, ongoing, and future.")]
     [SwaggerResponse(200, "List of reservations", typeof(IEnumerable<Reservation>))]
