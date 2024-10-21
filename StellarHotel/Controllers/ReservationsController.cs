@@ -1,5 +1,6 @@
 ﻿using Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql;
 using StellarHotel.Dtos;
 using StellarHotel.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
@@ -30,6 +31,10 @@ public class ReservationsController : ControllerBase
         {
             var availableRooms = await _roomService.GetAvailableRoomsAsync(roomSearchDto);
             return Ok(availableRooms);
+        }
+        catch (NpgsqlException ex)
+        {
+            return StatusCode(500, new { message = "Database connection error: " + ex.Message });
         }
         catch (Exception ex)
         {
