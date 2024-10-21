@@ -24,10 +24,17 @@ public class ReservationsController : ControllerBase
         Description = "Returns a list of available rooms based on the provided search criteria.")]
     [SwaggerResponse(200, "List of available rooms")]
     [SwaggerResponse(400, "Invalid search criteria")]
-    public async Task<IActionResult> GetAvailableRooms(RoomSearchDto roomSearchDto)
+    public async Task<IActionResult> GetAvailableRooms([FromQuery] RoomSearchDto roomSearchDto)
     {
-        var availableRooms = await _roomService.GetAvailableRoomsAsync(roomSearchDto);
-        return Ok(availableRooms);
+        try
+        {
+            var availableRooms = await _roomService.GetAvailableRoomsAsync(roomSearchDto);
+            return Ok(availableRooms);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
 
     [HttpGet("{id:int}", Name = "reservation-details")]
@@ -53,7 +60,8 @@ public class ReservationsController : ControllerBase
     }
 
     [HttpPost("create-reservation")]
-    [SwaggerOperation(Summary = "Create a reservation", Description = "Creates a new reservation with the provided details.")]
+    [SwaggerOperation(Summary = "Create a reservation",
+        Description = "Creates a new reservation with the provided details.")]
     [SwaggerResponse(201, "Reservation created", typeof(Reservation))]
     [SwaggerResponse(400, "Invalid reservation details")]
     public async Task<ActionResult<ReservationDto>> CreateReservation([FromBody] CreateRservationDto createRservation)
@@ -61,7 +69,7 @@ public class ReservationsController : ControllerBase
         try
         {
             var reservation = await _reservationService.CreateReservationAsync(createRservation);
-            
+
             return CreatedAtAction(nameof(GetReservationById), new { id = reservation.Id }, reservation);
         }
         catch (Exception ex)

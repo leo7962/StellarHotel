@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
-using Core.Models;
+﻿using Core.Models;
 using Microsoft.EntityFrameworkCore;
 using StellarHotel.Context;
+using System.Text.Json;
 
 namespace StellarHotel.Data;
 

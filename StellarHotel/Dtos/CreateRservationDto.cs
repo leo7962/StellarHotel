@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Core.Validations;
+﻿using Core.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace StellarHotel.Dtos;
 
@@ -7,7 +7,7 @@ public class CreateRservationDto
 {
     [Required] public int RoomId { get; set; }
 
-    [Required] [DataType(DataType.Date)] public DateTime CheckInDate { get; set; }
+    [Required][DataType(DataType.Date)] public DateTime CheckInDate { get; set; }
 
     [Required]
     [DataType(DataType.Date)]

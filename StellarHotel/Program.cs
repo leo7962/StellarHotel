@@ -23,7 +23,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "API for managing hotel room reservations and dynamic pricing",
         Contact = new OpenApiContact
         {
-            Name = "Leonardo Fabi�n Hern�ndez Pe�a",
+            Name = "Leonardo Fabián Hernández Peña",
             Email = "ingenieroleonardo@outlook.com",
             Url = new Uri("https://github.com/leo7962")
         },
@@ -50,6 +50,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+});
 
 app.UseHttpsRedirection();
 
