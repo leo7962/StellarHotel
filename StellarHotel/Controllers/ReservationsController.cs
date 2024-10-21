@@ -20,6 +20,11 @@ public class ReservationsController : ControllerBase
         _roomService = roomService;
     }
 
+    /// <summary>
+    /// Gets a list of available rooms for a range of dates.
+    /// </summary>
+    /// <param name="roomSearchDto">Parámetros de búsqueda, incluyendo fechas y número de huéspedes.</param>
+    /// <returns>List of available rooms with price details.</returns>
     [HttpGet("available-rooms")]
     [SwaggerOperation(Summary = "Get available rooms",
         Description = "Returns a list of available rooms based on the provided search criteria.")]
@@ -42,6 +47,11 @@ public class ReservationsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Gets the details of a specific reservation.
+    /// </summary>
+    /// <param name="id">Reserve ID.</param>
+    /// <returns>Reservation details.</returns>
     [HttpGet("{id:int}", Name = "reservation-details")]
     [SwaggerOperation(Summary = "Get reservation by ID", Description = "Fetches details of a specific reservation.")]
     [SwaggerResponse(200, "Reservation details", typeof(Reservation))]
@@ -54,6 +64,10 @@ public class ReservationsController : ControllerBase
         return Ok(reservation);
     }
 
+    /// <summary>
+    /// Obtains a list of all reservations.
+    /// </summary>
+    /// <returns>List of past, current, and future reservations.</returns>
     [HttpGet("all-reservations")]
     [SwaggerOperation(Summary = "Get all reservations",
         Description = "Returns a list of all reservations categorized as past, ongoing, and future.")]
@@ -64,6 +78,11 @@ public class ReservationsController : ControllerBase
         return Ok(reservations);
     }
 
+    /// <summary>
+    /// Create a new reservation.
+    /// </summary>
+    /// <param name="createRservation">Details of the reserve to be created.</param>
+    /// <returns>The reserve created.</returns>
     [HttpPost("create-reservation")]
     [SwaggerOperation(Summary = "Create a reservation",
         Description = "Creates a new reservation with the provided details.")]
@@ -83,6 +102,11 @@ public class ReservationsController : ControllerBase
         }
     }
 
+    /// <summary>
+    /// Cancels an existing reservation.
+    /// </summary>
+    /// <param name="id">ID of the reservation to be cancelled.</param>
+    /// <returns>NoContent if the cancellation was successful.</returns>
     [HttpDelete("{id:int}")]
     [SwaggerOperation(Summary = "Cancel a reservation", Description = "Cancels an existing reservation by ID.")]
     [SwaggerResponse(204, "Reservation cancelled")]
