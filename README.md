@@ -100,7 +100,7 @@ This will run all the tests and provide a summary of the results, indicating whi
 
 Developing Link
 -------
-Go to this link: [I deplyed here](https://stellarhotel.fly.dev/)
+Go to this link: [I deplyed here]([https://stellarhotel.fly.dev/](https://stellarhotel.fly.dev/swagger/index.html))
 
 Contribution
 ------------
